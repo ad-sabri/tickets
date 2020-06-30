@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- En-tête de la page -->
+        <meta charset="utf-8" />
+        <title>Tickets</title>
+    </head>
+
+    <body>
+        <h1> Réservez vos place de concerts ici </h1>
+        <table>
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>CODE</th>
+                    <th>Concerts</th>
+                    <th>Tarif</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="images/high_off_line.png" height="100" width="100"></td>
+                    <td>1</td>
+                    <td>Future</td>
+                    <td>40 &euro;</td>
+                </tr>
+                <tr>
+                    <td><img src="images/deux_freres.jpg" height="100" width="100"></td>
+                    <td>2</td>
+                    <td>PNL</td>
+                    <td>50 &euro;</td>
+                </tr>
+                <tr>
+                    <td><img src="images/freebase.png" height="100" width="100"></td>
+                    <td>3</td>
+                    <td>Kekra</td>
+                    <td>30 &euro;</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button onclick="reserver();">RESERVER</button>
+        
+        <script>
+            
+            //Déclaration des variables et des constantes
+            const CONCERT1 = 'Future';
+            const CONCERT2 = 'PNL';
+            const CONCERT3 = 'Kekra';
+            const PRIX_CONCERT1 = 40;
+            const PRIX_CONCERT2 = 50;
+            const PRIX_CONCERT3 = 30;
+            const CODE_CONCERT1 = '1';
+            const CODE_CONCERT2 = '2';  
+            const CODE_CONCERT3 = '3';    
+            var codeConcert;
+            var qtyConcert1 = 0;
+            var qtyConcert2 = 0;
+            var qtyConcert3 = 0;
+            var montantTotal = 0;
+            var showDetails = false; 
+            
+            function reserver() { 
+                //Traitement des données 
+                    //Lecture des données 
+                do {
+                    do {
+                        codeConcert = prompt('Veuillez entrer un code concert: ');
+                    } while(isNaN(codeConcert) 
+                        || (codeConcert!=CODE_CONCERT1
+                            && codeConcert!=CODE_CONCERT2
+                            && codeConcert!=CODE_CONCERT3));
+
+                    switch(codeConcert) {
+                        case CODE_CONCERT1:
+                            do {
+                                qtyConcert1 += parseInt(prompt('Nombre de tickets pour le concert de ' +CONCERT1));
+                            } while (isNaN(qtyConcert1) || qtyConcert1<0);
+                            break;
+
+                        case CODE_CONCERT2:
+                            do {
+                                qtyConcert2 += parseInt(prompt('Nombre de tickets pour le concert de ' +CONCERT2));
+                            } while (isNaN(qtyConcert2) || qtyConcert2<0);
+                            break;    
+
+                        case CODE_CONCERT3:
+                            do {
+                                qtyConcert3 += parseInt(prompt('Nombre de tickets pour le concert de ' +CONCERT3));
+                            } while (isNaN(qtyConcert3) || qtyConcert3<0);
+                            break;
+
+                    }
+                } while(confirm('Voulez-vous commander d\'autres tickets ?'));
+
+                    //Calcul
+
+                montantTotal = PRIX_CONCERT1 * qtyConcert1 
+                    + PRIX_CONCERT2 * qtyConcert2
+                    + PRIX_CONCERT3 * qtyConcert3;
+
+                showDetails = confirm('Voulez vous afficher le détail de votre commande ?');
+
+                //Affichage du résultat
+
+                if(montantTotal!=0) {
+                    if(showDetails) {
+                        document.write('<p> Votre sélection: </p>');
+                        document.write('<ul>');
+
+                        if(qtyConcert1>0) {
+                            document.write('<li>'+qtyConcert1+' x ' 
+                                +CONCERT1+ ' (' +PRIX_CONCERT1+' €)</li>');
+                        }
+
+                        if(qtyConcert2>0) {
+                            document.write('<li>'+qtyConcert2+' x ' 
+                                +CONCERT2+ ' (' +PRIX_CONCERT2+' €)</li>');
+                        }
+
+                        if(qtyConcert3>0) {
+                            document.write('<li>'+qtyConcert3+' x ' 
+                                +CONCERT3+ ' (' +PRIX_CONCERT3+' €)</li>');
+                        }
+
+                        document.write('</ul>');
+                        document.write('Total: '+montantTotal+ ' &euro;');
+
+
+                    } else {
+                        document.write('<p>Total: '+montantTotal+ ' &euro;</p>');
+                    }
+                } else {
+                    document.write('<p>Aucune sélection</p>');
+                }
+            }
+
+        </script>
+    </body>
+</html>
